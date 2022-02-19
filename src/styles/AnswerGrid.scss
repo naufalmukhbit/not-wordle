@@ -1,0 +1,40 @@
+.answer-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.answer-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.answer-cell {
+  width: 3.8rem;
+  height: 3.8rem;
+  border: 1px solid gray;
+  margin: 0.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &-character {
+    font-weight: bolder;
+    font-size: larger;
+  }
+
+  &.absent {
+    background-color: #3a3a3c;
+    border: 0;
+  }
+
+  &.present {
+    background-color: #b59f3b;
+    border: 0;
+  }
+
+  &.correct {
+    background-color: #538d4e;
+    border: 0;
+  }
+}
