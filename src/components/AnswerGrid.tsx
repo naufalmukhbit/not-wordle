@@ -1,13 +1,16 @@
+import { answerType, statusType } from "../App";
+
 interface AnswerGridProps {
   currentWord: string;
   words: string[];
+  answers: answerType[];
   activeRow: number;
 }
 
-const AnswerGrid = ({ currentWord, words, activeRow }: AnswerGridProps) => {
-  const renderCell = (character: string, rowIndex: number, index: number) => {
+const AnswerGrid = ({ currentWord, answers, activeRow }: AnswerGridProps) => {
+  const renderCell = (character: string, rowIndex: number, index: number, status?: statusType) => {
     return (
-      <div className="answer-cell" key={`answer-cell-${rowIndex}-${index}`}>
+      <div className={`answer-cell ${status}`} key={`answer-cell-${rowIndex}-${index}`}>
         <span className="answer-cell-character">
           {character.toUpperCase() ?? ""}
         </span>
@@ -15,7 +18,7 @@ const AnswerGrid = ({ currentWord, words, activeRow }: AnswerGridProps) => {
     );
   };
 
-  const renderRow = (word: string, rowIndex: number) => {
+  const renderRow = (answer: answerType, rowIndex: number) => {
     return rowIndex === activeRow ? (
       <div className="answer-row" key={"answer-row-" + rowIndex}>
         {renderCell(currentWord[0] ?? "", rowIndex, 0)}
@@ -26,18 +29,18 @@ const AnswerGrid = ({ currentWord, words, activeRow }: AnswerGridProps) => {
       </div>
     ) : (
       <div className="answer-row" key={"answer-row-" + rowIndex}>
-        {renderCell(word[0] ?? "", rowIndex, 0)}
-        {renderCell(word[1] ?? "", rowIndex, 1)}
-        {renderCell(word[2] ?? "", rowIndex, 2)}
-        {renderCell(word[3] ?? "", rowIndex, 3)}
-        {renderCell(word[4] ?? "", rowIndex, 4)}
+        {renderCell(answer.word[0] ?? "", rowIndex, 0, answer.status && answer.status[0])}
+        {renderCell(answer.word[1] ?? "", rowIndex, 1, answer.status && answer.status[1])}
+        {renderCell(answer.word[2] ?? "", rowIndex, 2, answer.status && answer.status[2])}
+        {renderCell(answer.word[3] ?? "", rowIndex, 3, answer.status && answer.status[3])}
+        {renderCell(answer.word[4] ?? "", rowIndex, 4, answer.status && answer.status[4])}
       </div>
     );
   };
 
   return (
     <div className="answer-container">
-      {words.map((word, rowIndex) => renderRow(word, rowIndex))}
+      {answers.map((answer, rowIndex) => renderRow(answer, rowIndex))}
     </div>
   );
 };

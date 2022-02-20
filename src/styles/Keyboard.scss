@@ -2,29 +2,43 @@
   &-container{
     display: flex;
     flex-direction: column;
+    padding: 10px;
   }
 
   &--row-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 2px;
   }
 
   &--cell {
-    padding: 1.2rem 0.8rem;
     border-radius: 4px;
     margin: 3px;
-    width: 1rem;
-    font-size: 12pt;
+    width: 2.7rem;
+    height: 3.6rem;
+    font-size: 11pt;
     font-weight: bold;
     background-color: gray;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    text-align: center;
+    color: white;
+    border: none;
 
     &-special {
-      width: 3rem;
+      width: 4rem;
+    }
+
+    &.absent {
+      background-color: #3a3a3c;
+    }
+  
+    &.present {
+      background-color: #b59f3b;
+    }
+  
+    &.correct {
+      background-color: #538d4e;
     }
   }
 }

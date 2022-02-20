@@ -9,8 +9,8 @@
 }
 
 .answer-cell {
-  width: 3.8rem;
-  height: 3.8rem;
+  width: 3.7rem !important;
+  height: 3.7rem !important;
   border: 1px solid gray;
   margin: 0.2rem;
   display: flex;
@@ -20,21 +20,21 @@
 
   &-character {
     font-weight: bolder;
-    font-size: larger;
+    font-size: 26pt;
   }
 
   &.absent {
     background-color: #3a3a3c;
-    border: 0;
+    border: 1px solid #3a3a3c;
   }
 
   &.present {
     background-color: #b59f3b;
-    border: 0;
+    border: 1px solid #b59f3b;
   }
 
   &.correct {
     background-color: #538d4e;
-    border: 0;
+    border: 1px solid #538d4e;
   }
 }

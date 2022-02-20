@@ -2,10 +2,22 @@ import { useEffect, useState } from "react";
 import "./App.scss";
 import AnswerGrid from "./components/AnswerGrid";
 import VirtualKeyboard from "./components/Keyboard";
+import { validate } from "./utils/validation";
+
+export type statusType = "absent" | "present" | "correct";
+export type answerType = {
+  word: string;
+  status?: statusType[];
+};
 
 function App() {
   const [currentWord, setCurrentWord] = useState("");
   const [words, setWords] = useState<string[]>([...Array<string>(6)].fill(""));
+  const [answers, setAnswers] = useState<answerType[]>([
+    ...Array<answerType>(6).fill({
+      word: "",
+    }),
+  ]);
   const [activeRow, setActiveRow] = useState(0);
 
   const onLetterPress = (letter: string) => {
@@ -26,6 +38,13 @@ function App() {
           current[activeRow] = currentWord;
           return current;
         });
+        setAnswers((current) => {
+          current[activeRow] = {
+            word: currentWord,
+            status: validate(currentWord),
+          };
+          return current;
+        });
         setActiveRow((row) => row + 1);
         setCurrentWord("");
       }
@@ -34,23 +53,17 @@ function App() {
 
   return (
     <div className="App">
-      <header
-        className="App-header"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <AnswerGrid
-          words={words}
-          currentWord={currentWord}
-          activeRow={activeRow}
-        />
-        <VirtualKeyboard
-          onLetterPress={onLetterPress}
-          onSpecialButton={onSpecialButton}
-        />
-      </header>
+      <header className="App-header">NOTWORDLE</header>
+      <AnswerGrid
+        words={words}
+        answers={answers}
+        currentWord={currentWord}
+        activeRow={activeRow}
+      />
+      <VirtualKeyboard
+        onLetterPress={onLetterPress}
+        onSpecialButton={onSpecialButton}
+      />
     </div>
   );
 }
